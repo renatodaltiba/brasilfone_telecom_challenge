@@ -2,8 +2,9 @@ import * as yup from 'yup'
 
 export const LoginSchema = yup
   .object({
-    email: yup
+    emailorphone: yup
       .string()
+      .trim()
       .min(5, 'Informe um número ou e-mail correto.')
       .max(100, 'Informe um número ou e-mail correto.')
       .required('Informe um número ou e-mail correto.'),
