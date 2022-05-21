@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { Button } from 'components/Button'
 import { FormInput } from 'components/FormInput'
 import Link from 'next/link'
-import { useForm } from 'react-hook-form'
+import { FieldError, useForm } from 'react-hook-form'
 import { IoIosWarning } from 'react-icons/io'
 import { LoginSchema } from 'schemas/Login'
 import { Form } from 'templates/Form'
@@ -16,8 +16,6 @@ export default function Login() {
     resolver: yupResolver(LoginSchema)
   })
 
-  console.log(errors)
-
   const onSubmit = handleSubmit((data) => console.log())
   return (
     <Form>
@@ -28,9 +26,9 @@ export default function Login() {
         <form onSubmit={onSubmit} className="mt-6 flex w-full flex-col gap-2">
           <FormInput
             name="emailorphone"
-            label="E-mail"
+            label="E-mail ou Telefone:"
             type="text"
-            placeholder="Enter your email"
+            placeholder="Entre com seu e-mail ou telefone"
             errors={errors}
             register={register}
           />
@@ -42,7 +40,7 @@ export default function Login() {
             errors={errors}
             register={register}
           />
-          {Object.values(errors).map((error: any) => {
+          {Object.values(errors).map((error: FieldError) => {
             return (
               <div className="flex items-center justify-center gap-2 pt-3 text-error">
                 <IoIosWarning className="text-2xl" />
