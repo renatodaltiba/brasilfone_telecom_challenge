@@ -1,9 +1,8 @@
-
 version: '3.7'
 
 services:
-  main:
-    container_name: main
+  api:
+    container_name: api
     build:
       context: .
       target: development
