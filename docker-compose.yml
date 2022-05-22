@@ -1,0 +1,47 @@
+version: '3'
+services: 
+  api:
+    build: 
+      context: ./api
+      target: development
+    ports: 
+      - "3080:3080"
+    container_name: nest-api
+    command: yarn start:dev
+    env_file:
+      - ./api/.env
+    networks:
+      - webnet
+    volumes: 
+       - ./api:/usr/src/app/api
+       - /usr/src/app/api/node_modules
+    depends_on:
+      - postgres
+  client:
+    build:
+      context: ./client
+      target: development
+    ports:
+      - "3000:3000"
+    container_name: next-client
+    command: yarn dev
+    volumes:
+      - ./client:/usr/src/app/client
+      - /usr/src/app/client/node_modules
+  postgres:
+    image: postgres:12
+    container_name: postgres
+    networks:
+      - webnet
+    env_file:
+      - ./api/.env
+    expose:
+      - "5432"
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+networks:
+  webnet:
+volumes:
+  pgdata:

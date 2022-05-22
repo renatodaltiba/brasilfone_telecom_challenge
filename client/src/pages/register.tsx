@@ -7,7 +7,6 @@ import Link from 'next/link'
 import { Fragment, useState } from 'react'
 import { Controller, FieldError, useForm } from 'react-hook-form'
 import { AiOutlineCaretDown } from 'react-icons/ai'
-import 'react-phone-input-2/lib/style.css'
 import { RegisterSchema } from 'schemas/Register'
 
 import { Form } from 'templates/Form'
