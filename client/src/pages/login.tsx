@@ -1,9 +1,9 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Button } from 'components/Button'
+import { ErrorMessage } from 'components/ErrorMessage'
 import { FormInput } from 'components/FormInput'
 import Link from 'next/link'
 import { FieldError, useForm } from 'react-hook-form'
-import { IoIosWarning } from 'react-icons/io'
 import { LoginSchema } from 'schemas/Login'
 import { Form } from 'templates/Form'
 
@@ -19,16 +19,15 @@ export default function Login() {
   const onSubmit = handleSubmit((data) => console.log())
   return (
     <Form>
-      <div className="flex flex-col items-center px-8 pt-11 pb-14">
-        <h2 className="font-custom text-2xl font-bold text-primary">
-          Conecte-se
+      <div className="flex flex-col items-center px-8 pt-4 pb-7">
+        <h2 className="font-custom text-[26px] font-bold text-primary">
+          Login
         </h2>
         <form onSubmit={onSubmit} className="mt-6 flex w-full flex-col gap-2">
           <FormInput
             name="emailorphone"
             label="E-mail ou Telefone:"
             type="text"
-            placeholder="Entre com seu e-mail ou telefone"
             errors={errors}
             register={register}
           />
@@ -36,20 +35,16 @@ export default function Login() {
             name="password"
             label="Senha:"
             type="password"
-            placeholder="Digite sua senha"
             errors={errors}
             register={register}
           />
-          {Object.values(errors).map((error: FieldError) => {
-            return (
-              <div className="flex items-center justify-center gap-2 pt-3 text-error">
-                <IoIosWarning className="text-2xl" />
-                <span>{error.message}</span>
-              </div>
-            )
-          })}
+          {Object.values(errors)
+            .slice(0, 1)
+            .map((error: FieldError) => {
+              return <ErrorMessage message={error.message!} />
+            })}
 
-          <div className="mx-auto mt-6 h-[50] w-full max-w-xs">
+          <div className="mx-auto mt-[22px] h-[50] w-full max-w-[240px]">
             <Button>Conectar</Button>
           </div>
         </form>
