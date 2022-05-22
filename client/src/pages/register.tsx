@@ -15,7 +15,6 @@ import countryDDI from 'utils/countryDDI'
 
 export default function Register() {
   const [country, setCountry] = useState(countryDDI[0])
-  const [offers, setOffers] = useState(false)
   const {
     register,
     handleSubmit,
@@ -26,7 +25,6 @@ export default function Register() {
   })
 
   const onSubmit = handleSubmit((data) => console.log(data))
-  console.log(errors)
 
   return (
     <Form>
@@ -158,13 +156,14 @@ export default function Register() {
             <Controller
               name="acceptOffers"
               control={control}
-              defaultValue=""
+              defaultValue={true}
               render={({ field: { onChange } }) => (
                 <div className="mt-3 flex flex-row gap-4">
                   <label className="flex items-center gap-3">
                     <input
                       type="radio"
                       name="acceptOffers"
+                      defaultChecked
                       value="true"
                       onChange={() => {
                         onChange(true)
@@ -189,7 +188,7 @@ export default function Register() {
           </fieldset>
 
           {Object.values(errors)
-            .slice(0, 3)
+            .slice(0, 1)
             .map((error: FieldError) => {
               return <ErrorMessage message={error.message!} />
             })}
