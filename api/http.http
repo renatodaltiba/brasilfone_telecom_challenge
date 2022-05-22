@@ -1,13 +1,13 @@
+
 POST http://localhost:3080/api/v1/users HTTP/1.1
 Content-Type: application/json
 
 {
-  "name": "test",
-  "description": "test",
-  "type": "test",
-  "url": "test",
-  "username": "test",
-  "password": "test"
+  "name": "Renato Daltiba Schneider",
+  "email": "renatodaltiba@gmail.com",
+  "phone": "69992561024",
+  "password": "27.9.1995Re",
+  "offers": false
 }
 
 ###
