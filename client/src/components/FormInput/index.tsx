@@ -20,16 +20,9 @@ export const FormInput = ({
   type,
   ...rest
 }: FormInputProps) => {
-  const passwordTypes = [
-    {
-      name: 'password'
-    },
-    {
-      name: 'text'
-    }
-  ]
+  const passwordTypes = ['password', 'text']
 
-  const [passwordType, setPasswordType] = useState(passwordTypes[0].name)
+  const [passwordType, setPasswordType] = useState(passwordTypes[0])
 
   return (
     <div className="relative w-full">
@@ -38,7 +31,7 @@ export const FormInput = ({
           htmlFor={label}
           className={`${
             errors[name] ? 'text-error' : 'text-primary'
-          } flex w-full flex-col font-normal `}
+          } flex w-full flex-col text-sm font-normal `}
         >
           {label}
         </label>
@@ -47,20 +40,23 @@ export const FormInput = ({
         <input
           type={type === 'password' ? passwordType : type}
           className={`${
-            errors[name] ? 'ring-error' : 'ring-[#3D454C]'
-          }  mt-2 h-10 w-full rounded-md px-3 outline-none ring-1`}
+            errors[name]
+              ? 'ring-error focus:ring-error'
+              : 'ring-[#3D454C] focus:ring-[#3D454C]'
+          } mt-2 h-10 w-full rounded-md border-none px-3 ring-[1px]
+          `}
           {...register(`${name}`)}
           {...rest}
         />
         {type === 'password' && (
-          <button
+          <a
             onClick={() =>
               setPasswordType(passwordType === 'password' ? 'text' : 'password')
             }
-            className="absolute right-4 text-xl"
+            className="absolute right-4 cursor-pointer text-xl"
           >
             {passwordType === 'password' ? <FaEye /> : <FaEyeSlash />}
-          </button>
+          </a>
         )}
       </div>
     </div>
