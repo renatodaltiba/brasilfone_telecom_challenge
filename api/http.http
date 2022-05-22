@@ -1,0 +1,13 @@
+POST http://localhost:3080/api/v1/users HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "test",
+  "description": "test",
+  "type": "test",
+  "url": "test",
+  "username": "test",
+  "password": "test"
+}
+
+###
