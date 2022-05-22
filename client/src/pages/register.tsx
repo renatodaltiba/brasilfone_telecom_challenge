@@ -1,4 +1,4 @@
-import { Listbox, RadioGroup, Transition } from '@headlessui/react'
+import { Listbox, Transition } from '@headlessui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Button } from 'components/Button'
 import { ErrorMessage } from 'components/ErrorMessage'
@@ -16,7 +16,6 @@ import countryDDI from 'utils/countryDDI'
 export default function Register() {
   const [country, setCountry] = useState(countryDDI[0])
   const [offers, setOffers] = useState(false)
-
   const {
     register,
     handleSubmit,
@@ -148,26 +147,46 @@ export default function Register() {
             </label>
           </div>
 
-          <div>
-            <RadioGroup value={offers} onChange={setOffers}>
-              <RadioGroup.Label>
-                Quero receber ofertas, novidades, conteúdos informativos e
-                publicitários da Disparo Pro
-              </RadioGroup.Label>
-              <div>
-                <RadioGroup.Option value={true}>
-                  {({ checked }) => (
-                    <span className={checked ? 'bg-blue-200' : ''}>Sim</span>
-                  )}
-                </RadioGroup.Option>
-                <RadioGroup.Option value={true}>
-                  {({ checked }) => (
-                    <span className={checked ? 'bg-blue-200' : ''}>Não</span>
-                  )}
-                </RadioGroup.Option>
-              </div>
-            </RadioGroup>
-          </div>
+          <fieldset
+            id="acceptOffers"
+            className="flex w-full flex-col items-center"
+          >
+            <h4 className="text-sm">
+              Quero receber ofertas, novidades, conteúdos informativos e
+              publicitários da Disparo Pro
+            </h4>
+            <Controller
+              name="acceptOffers"
+              control={control}
+              defaultValue=""
+              render={({ field: { onChange } }) => (
+                <div className="mt-3 flex flex-row gap-4">
+                  <label className="flex items-center gap-3">
+                    <input
+                      type="radio"
+                      name="acceptOffers"
+                      value="true"
+                      onChange={() => {
+                        onChange(true)
+                      }}
+                    />
+                    Sim
+                  </label>
+                  <label className="flex items-center gap-3">
+                    <input
+                      type="radio"
+                      name="acceptOffers"
+                      value="false"
+                      onChange={() => {
+                        onChange(false)
+                      }}
+                    />
+                    Não
+                  </label>
+                </div>
+              )}
+            />
+          </fieldset>
 
           {Object.values(errors)
             .slice(0, 3)
