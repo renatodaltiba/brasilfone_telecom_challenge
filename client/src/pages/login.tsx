@@ -63,8 +63,8 @@ export default function Login() {
           />
           {Object.values(errors)
             .slice(0, 1)
-            .map((error: FieldError) => {
-              return <ErrorMessage message={error.message!} />
+            .map((error: FieldError, index) => {
+              return <ErrorMessage message={error.message!} key={index} />
             })}
 
           <div className="mx-auto mt-[22px] h-[50] w-full max-w-[240px]">

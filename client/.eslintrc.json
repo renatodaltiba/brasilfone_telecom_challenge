@@ -8,6 +8,7 @@
   ],
   "ignorePatterns": ["*.config.js"],
   "rules": {
-    "tailwindcss/classnames-order": "off"
+    "tailwindcss/classnames-order": "off",
+    "react/no-unknown-property": "off"
   }
 }

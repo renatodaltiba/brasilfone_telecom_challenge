@@ -216,8 +216,8 @@ export default function Register() {
 
           {Object.values(errors)
             .slice(0, 1)
-            .map((error: FieldError) => {
-              return <ErrorMessage message={error.message!} />
+            .map((error: FieldError, index) => {
+              return <ErrorMessage message={error.message!} key={index} />
             })}
 
           <div className="mx-auto mt-6 h-[50] w-full max-w-xs">
