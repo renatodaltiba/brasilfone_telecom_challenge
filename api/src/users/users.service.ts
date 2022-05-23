@@ -23,11 +23,16 @@ export class UsersService {
   }
 
   async findByPhone(phone: string) {
-    return await this.prisma.user.findFirst({
+    console.log(phone)
+
+    const user = await this.prisma.user.findFirst({
       where: {
-        phone,
+        phone: phone,
       },
-    });
+      });
+
+
+     return user
   }
 
   async findByEmail(email: string) {
@@ -37,5 +42,15 @@ export class UsersService {
       },
     });
   }
-  
+
+  async findPerson(phoneoremail: string) {
+    return await this.prisma.user.findFirst({
+      where: {
+        OR: [
+          { phone: phoneoremail },
+          { email: phoneoremail },
+        ],
+      },
+    });
+  }
 }
