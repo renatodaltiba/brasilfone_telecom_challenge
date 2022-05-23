@@ -2,6 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { Button } from 'components/Button'
 import { ErrorMessage } from 'components/ErrorMessage'
 import { FormInput } from 'components/FormInput'
+import { useAuth } from 'hooks/useAuth'
 import Link from 'next/link'
 import { FieldError, useForm } from 'react-hook-form'
 import { LoginSchema } from 'schemas/Login'
@@ -11,12 +12,32 @@ export default function Login() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors }
   } = useForm({
     resolver: yupResolver(LoginSchema)
   })
 
-  const onSubmit = handleSubmit((data) => console.log())
+  const { signIn } = useAuth()
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      await signIn({
+        emailorphone: data.emailorphone,
+        password: data.password
+      })
+    } catch (err: any) {
+      if (err.response.status === 401) {
+        setError('emailorphone', {
+          message: 'Email ou senha inválidos'
+        })
+
+        setError('password', {
+          message: 'Email ou senha inválidos'
+        })
+      }
+    }
+  })
+
   return (
     <Form>
       <div className="flex flex-col items-center px-8 pt-4 pb-7">
