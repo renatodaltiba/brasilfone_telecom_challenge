@@ -1,6 +1,5 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { User } from '@prisma/client';
 import { compareSync } from 'bcrypt';
 import { UsersService } from 'src/users/users.service';
 import { AuthDTO } from './dto/auth-dto';
@@ -27,7 +26,7 @@ export class AuthService {
 
 
   async validateUser(emailorphone: string, password: string){
-    const user: User = await this.userService.findPerson(emailorphone);
+    const user = await this.userService.findPerson(emailorphone);
 
       if (!user) {
         throw new UnauthorizedException();
