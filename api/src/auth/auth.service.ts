@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '@prisma/client';
 import { compareSync } from 'bcrypt';
 import { UsersService } from 'src/users/users.service';
+import { AuthDTO } from './dto/auth-dto';
 
 @Injectable()
 export class AuthService {
@@ -11,10 +12,11 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async login(user: any) {
+  async login(authDTO: AuthDTO) {
+    const user = await this.validateUser(authDTO.emailorphone, authDTO.password);
+
     const payload = {
       sub: user.id,
-      email: user.email,
     };
 
     return {
@@ -23,16 +25,15 @@ export class AuthService {
   }
 
 
-  async validateUser(phone: string, password: string){
-    let user: User;
-    try {
-      user = await this.userService.findPerson(phone) 
-    } catch (err) {
-      return null;
-    }
+  async validateUser(emailorphone: string, password: string){
+    const user: User = await this.userService.findPerson(emailorphone);
 
-
+      if (!user) {
+        throw new UnauthorizedException();
+      }
+    
     const isPasswordMatched = compareSync(password, user.password);
+    
     if (!isPasswordMatched) {
       return null;
     }

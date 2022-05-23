@@ -1,14 +1,13 @@
-import { Controller, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { LocalStrategy } from './strategies/local.strategy';
+import { AuthDTO } from './dto/auth-dto';
 
 @Controller('api/auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @UseGuards(LocalStrategy)
   @Post('login')
-  async login(@Req() req) {
-    return await this.authService.login(req);
+  async login(@Body() authDTO: AuthDTO) {
+    return await this.authService.login(authDTO);
   }
 }
