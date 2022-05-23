@@ -65,6 +65,7 @@ Necessário realizar as instalações.
   $ yarn build
   # Depois inicie o servidor do backend utilizando o comando
   $ yarn start:prod
+```
 
 ### **Iniciando o Frot-end**
 
