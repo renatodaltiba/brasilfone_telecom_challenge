@@ -1,13 +1,16 @@
 import { Listbox, Transition } from '@headlessui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { AxiosError } from 'axios'
 import { Button } from 'components/Button'
 import { ErrorMessage } from 'components/ErrorMessage'
 import { FormInput } from 'components/FormInput'
 import Link from 'next/link'
+import Router from 'next/router'
 import { Fragment, useState } from 'react'
 import { Controller, FieldError, useForm } from 'react-hook-form'
 import { AiOutlineCaretDown } from 'react-icons/ai'
 import { RegisterSchema } from 'schemas/Register'
+import { api } from 'service/api'
 
 import { Form } from 'templates/Form'
 import countryDDI from 'utils/countryDDI'
@@ -18,12 +21,37 @@ export default function Register() {
     register,
     handleSubmit,
     control,
+    setError,
     formState: { errors }
   } = useForm({
     resolver: yupResolver(RegisterSchema)
   })
+  type ErrorProps = {}
 
-  const onSubmit = handleSubmit((data) => console.log(data))
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      await api.post('/api/v1/users', {
+        name: data.name,
+        email: data.email,
+        phone: data.numero,
+        ddi: data.ddi.country,
+        offers: data.acceptOffers,
+        password: data.password
+      })
+
+      Router.push('/login')
+    } catch (e) {
+      const err = e as AxiosError
+      if (err.response?.status === 400) {
+        setError('email', {
+          message: 'Usuário já cadastrado'
+        })
+        setError('numero', {
+          message: 'Usuário já cadastrado'
+        })
+      }
+    }
+  })
 
   return (
     <Form>
