@@ -1,7 +1,7 @@
 import { useAuth } from 'hooks/useAuth'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
-import { parseCookies } from 'nookies'
+import { destroyCookie, parseCookies } from 'nookies'
 import { getAPIClient } from 'service/axios'
 
 type UserProps = {
@@ -25,10 +25,10 @@ export default function Home({ user }: UserProps) {
 
       <div className="mx-auto my-0 mt-5 flex w-full max-w-5xl flex-row justify-between">
         <div>
-          <p>{user.name}</p>
-          <p>{user.email}</p>
-          <p>{user.phone}</p>
-          <p>{user.offers ? 'Sim' : 'Não'}</p>
+          <p>{user?.name}</p>
+          <p>{user?.email}</p>
+          <p>{user?.phone}</p>
+          <p>{user?.offers ? 'Sim' : 'Não'}</p>
         </div>
 
         <button
@@ -55,11 +55,22 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     }
   }
 
-  const { data } = await apiCtx.get('/api/v1/users/me')
+  try {
+    const { data } = await apiCtx.get('/api/v1/users/me')
 
-  return {
-    props: {
-      user: data
+    return {
+      props: {
+        user: data
+      }
+    }
+  } catch (e) {
+    destroyCookie(ctx, 'token')
+
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false
+      }
     }
   }
 }

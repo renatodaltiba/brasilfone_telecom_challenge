@@ -3,7 +3,9 @@ import { Button } from 'components/Button'
 import { ErrorMessage } from 'components/ErrorMessage'
 import { FormInput } from 'components/FormInput'
 import { useAuth } from 'hooks/useAuth'
+import { GetServerSideProps } from 'next'
 import Link from 'next/link'
+import { parseCookies } from 'nookies'
 import { FieldError, useForm } from 'react-hook-form'
 import { LoginSchema } from 'schemas/Login'
 import { Form } from 'templates/Form'
@@ -83,4 +85,21 @@ export default function Login() {
       </div>
     </Form>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { token } = parseCookies(ctx)
+
+  if (token) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+  }
+
+  return {
+    props: {}
+  }
 }
