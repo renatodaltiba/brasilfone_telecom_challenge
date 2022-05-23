@@ -1,10 +1,11 @@
-FROM node:alpine As development
+FROM node:alpine as production
 
 WORKDIR /usr/src/app/client
 
 COPY package*.json ./
 
-RUN yarn --only=development
+RUN yarn
 
 COPY . .
 
+RUN yarn build

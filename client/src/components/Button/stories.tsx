@@ -1,9 +1,14 @@
-import { Story, Meta } from '@storybook/react'
-import { Button } from '.'
+import { Meta, Story } from '@storybook/react'
+import { Button, ButtonProps } from '.'
 
 export default {
   title: 'Button',
-  component: Button
+  component: Button,
+
 } as Meta
 
-export const Default: Story = () => <Button />
+export const Default: Story<ButtonProps> = (args) => <Button {...args} />
+
+Default.args = {
+  children: 'Button',
+}

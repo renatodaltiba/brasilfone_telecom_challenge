@@ -1,6 +1,6 @@
 import { IoIosWarning } from 'react-icons/io'
 
-type ErrorMessageProps = {
+export type ErrorMessageProps = {
   message: string
 }
 

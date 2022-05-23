@@ -1,19 +1,19 @@
-import { Listbox, Transition } from '@headlessui/react'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { AxiosError } from 'axios'
-import { Button } from 'components/Button'
-import { ErrorMessage } from 'components/ErrorMessage'
-import { FormInput } from 'components/FormInput'
-import Link from 'next/link'
-import Router from 'next/router'
-import { Fragment, useState } from 'react'
-import { Controller, FieldError, useForm } from 'react-hook-form'
-import { AiOutlineCaretDown } from 'react-icons/ai'
-import { RegisterSchema } from 'schemas/Register'
-import { api } from 'service/api'
+import { Listbox, Transition } from '@headlessui/react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { AxiosError } from 'axios';
+import { Button } from 'components/Button';
+import { ErrorMessage } from 'components/ErrorMessage';
+import { FormInput } from 'components/FormInput';
+import Link from 'next/link';
+import Router from 'next/router';
+import { Fragment, useState } from 'react';
+import { Controller, FieldError, useForm } from 'react-hook-form';
+import { AiOutlineCaretDown } from 'react-icons/ai';
+import { RegisterSchema } from 'schemas/Register';
+import { api } from 'service/api';
 
-import { Form } from 'templates/Form'
-import countryDDI from 'utils/countryDDI'
+import { Form } from 'templates/Form';
+import countryDDI from 'utils/countryDDI';
 
 export default function Register() {
   const [country, setCountry] = useState(countryDDI[0])

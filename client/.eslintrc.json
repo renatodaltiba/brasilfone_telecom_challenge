@@ -8,14 +8,6 @@
   ],
   "ignorePatterns": ["*.config.js"],
   "rules": {
-    "tailwindcss/classnames-order": "off",
-    "import/order": [
-      "error",
-      {
-        "alphabetize": {
-          "order": "asc"
-        }
-      }
-    ]
+    "tailwindcss/classnames-order": "off"
   }
 }

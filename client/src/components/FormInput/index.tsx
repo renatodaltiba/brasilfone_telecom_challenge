@@ -1,7 +1,7 @@
 import { InputHTMLAttributes, useState } from 'react'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 
-type FormInputProps = {
+export type FormInputProps = {
   name: string
   label?: string
   register?: any
