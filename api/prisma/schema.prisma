@@ -16,21 +16,12 @@ model User {
   email     String    @unique @db.VarChar(100)
   phone     String    @db.VarChar(11)
   password  String
+  ddi       String    @db.VarChar(20)
   offers    Boolean   @default(true)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @default(now())
   deletedAt DateTime?
 
 
-  RefreshToken RefreshToken[]
   @@map("users")
-}
-
-model RefreshToken {
-  id        String @id @default(uuid())
-  expiresAt Int
-  user      User   @relation(fields: [userId], references: [id])
-  userId    String
-
-  @@map("refreshToken")
 }

@@ -3,9 +3,10 @@ POST http://localhost:3080/api/v1/users HTTP/1.1
 Content-Type: application/json
 
 {
-  "name": "Renato Daltiba Schneider",
-  "email": "renatodaltibas@gmail.com",
-  "phone": "69992561022",
+  "name": "Marcelo Rodrigues",
+  "email": "asdasdsad@gmail.com",
+  "phone": "79923322323",
+  "ddi": "+55",
   "password": "27.9.1995Re",
   "offers": false
 }
@@ -16,7 +17,7 @@ POST http://localhost:3080/api/auth/login HTTP/1.1
 Content-Type: application/json
 
 {
-  "phoneoremail": "699925610dasdas224",
+  "emailorphone": "asdasdsad@gmail.com",
   "password": "27.9.1995Re"
 }
 
@@ -24,4 +25,4 @@ Content-Type: application/json
 ###
 GET http://localhost:3080/api/v1/users/me HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlOWU0NGE5NS1hMzIwsLTRlNzUtYmNhNS0yYmZmMmQwZjRlYjkiLCJlbWFpbCI6InJlbmF0b2RhbHRpYmFAZ21haWwuY29tIiwiaWF0IjoxNjUzMzE4Njg3LCJleHAiOjE2NTMzNjE4ODd9.OJOi1MYPzyCcjYZVja01YA5qI6a-7Q5Y-5n6xRC8Ioc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhNzhkOWU5Zi05MTZhLTQ1ZjMtYjQzZi02M2FiMGNjYTE5YmEiLCJpYXQiOjE2NTMzMjc2MTEsImV4cCI6MTY1MzMyNzY3MX0.YcvG85NEUGqefl5rGlc4WxKfrcKzeBzqSu2HpJ0ZFB8

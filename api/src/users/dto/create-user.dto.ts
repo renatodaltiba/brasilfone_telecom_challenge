@@ -15,6 +15,10 @@ export class CreateUserDto {
   phone: string
 
   @IsNotEmpty()
+  @Length(1, 20)
+  ddi: string
+
+  @IsNotEmpty()
   @Length(8, 60)
   password: string
 
