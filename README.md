@@ -68,7 +68,7 @@ Necessário realizar as instalações.
   # Obs: Todos os modelos de Request estão dentro da pasta ./api/http.http
 ```
 
-### **Iniciando o Frot-end**
+### **Iniciando o Frontend**
 
 ```bash
   # Volte para o arquivo raiz do projeto
